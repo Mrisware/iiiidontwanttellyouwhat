@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查看征信审核补充要件详情</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="text-label cb-tr">
+                <div class="cb-dt">备注信息：</div>
+                <div class="cb-dd" id="remark">--</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/static/js/jquery-2.1.1.min.js"></script>
+<script src="/static/js/jquery.photo.gallery.js"></script>
+<script src="/static/js/common.js"></script>
+<script>
+    (function ($) {
+        $(function () {
+            //获取贷款单编号
+            var id = getQueryString('id');
+            //查询征信审核补充要件详情
+            getApiData(1000616, {"id": id}, function (data) {
+                if (data.errorNo === 0) {
+                    var result = data.data;
+                    var material_upload = result.material_upload;
+                    var listHtml = '', ids = [];
+                    for (var i = 0, l = material_upload.length; i < l; i++) {
+                        listHtml += '<div class="cb-row"> <div class="row"> <div class="col-12"> <div class="cb-title"> <div class="title"> <span class="icon icon-attachment">&nbsp;</span> <span class="text j_materialDesc">' + material_upload[i].material_desc + '</span> </div> </div> </div> </div> <div class="row"> <div class="col-12"> <ul class="cb-upload_list gallerys">';
+                        var files = material_upload[i].files;
+                        var filesHtml = '';
+                        var len = files.length;
+                        if (len === 1) {
+                            filesHtml += '<li> <div class="upload"> <div class="bg"> <img src="' + files[0].url3 + '" data-src="' + files[0].url + '" alt="" class="gallery-pic"> </div> <div class="txt j_materialName">要件资料</div> </div> </li>';
+                        } else {
+                            for (var j = 0; j < len; j++) {
+                                filesHtml += '<li> <div class="upload"> <div class="bg"> <img src="' + files[j].url3 + '" data-src="' + files[j].url + '" alt="" class="gallery-pic"> </div> <div class="txt j_materialName">要件资料' + (j + 1) + '</div> </div> </li>';
+                            }
+                        }
+                        listHtml += filesHtml + '</ul> </div> </div> </div>';
+                    }
+                    $(listHtml).insertBefore($('.container').find('.row:last'));
+                    var remark = result.remark;
+                    if (result.remark) {
+                        $('#remark').html(result.remark);
+                    } else {
+                        $('#remark').parents('.row').remove();
+                    }
+                    $('.gallery-pic').on('click', function () {
+                        $.openPhotoGallery($(this));
+                    });
+                }
+            });
+        });
+    })(jQuery);
+</script>
+<script src="/static/js/iframe.js"></script>
+</body>
+</html>
