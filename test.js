@@ -74,12 +74,6 @@ export default class HomeNewComponent extends React.Component {
 
             ],//提现列表
         };
-        // if (System.CITY_INFO.cityName === '') {
-        //     this.getCurrentPosition();
-        // } else {
-        //     this.state.cityInfo.cityName = System.CITY_INFO.cityName;
-        //     this.state.cityInfo.cityCode = System.CITY_INFO.cityCode;
-        // }
         this.getCurrentPosition();
     }
 
@@ -416,11 +410,7 @@ export default class HomeNewComponent extends React.Component {
                             </TouchableWithoutFeedback>
                             <TouchableWithoutFeedback
                                 onPress={() => {
-                                    this.navigation.navigate('ShopSearchScreen',{
-                                        // province_code: this.province_code,
-                                        // supply_name: this.supply_name,
-                                        // wash_type: this.wash_type,
-                                    });
+                                    this.navigation.navigate('ShopSearchScreen',{});
                                 }}
                             >
                                 <View style={[
@@ -513,11 +503,8 @@ export default class HomeNewComponent extends React.Component {
                     <Image source={ImageUtil.IconRightGray_} style={{marginLeft: 10,width:5,height:10}} />
                 </View> : null}
                 rightTextStyle={[CustomStyles.fontSize14,CustomStyles.colorGray]}
-                // rightImgStyle={{marginLeft: 10}}
-                // rightImgSource={ImageUtil.IconRightGray_}
                 containerStyle={{paddingRight: 15, paddingLeft: 15}}
                 onPress={() => {
-                // && this.state.client_reward !== '0.00'
                     if (Utils.isLogin()) {
                         if (Utils.isGoLogin(this.navigation)) {
                             this.navigation.navigate('RewardComponentScreen');
@@ -862,7 +849,6 @@ export default class HomeNewComponent extends React.Component {
                     <View>
                         <ImageBackground source={this.oilData.oliDrumImg} style={{justifyContent: 'center', alignItems: 'center',width: 58, height: 66}}
                                          resizeMode={'contain'}>
-                            {/*<Text style={[{fontSize: 10, color: '#ffe2ba', marginTop: 10},CustomStyles.fontBold]}>{this.state.curOliDrum}ml</Text>*/}
                         </ImageBackground>
                     </View>
                 </TouchableWithoutFeedback>
