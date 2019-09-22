@@ -190,6 +190,11 @@ export default class HomeNewComponent extends React.Component {
                                 });
                                 break;
                             case 'assisting'://正在发起(对应油量显示)
+q
+exit
+;
+q!
+visual
                                 let cur = data.client_partake_value;//当前油量
                                 let total = data.capacity;//总油量
                                 let per = cur /total;
@@ -902,4 +907,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 10,
     },
+    testing: {
+      fontSize: 14
+    }
 });
